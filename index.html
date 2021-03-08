@@ -20,6 +20,18 @@
 	</style>
 
 	<script src="http://MermaidJS/_archive_/v8.9.1/from-GitHub/mermaid-develop/dist/mermaid.js"></script>
+
+
+	<script type="text/javascript" src="https://pagecdn.io/lib/ace/1.4.12/ace.js"></script>
+	<script type="text/javascript" src="https://pagecdn.io/lib/ace/1.4.12/ext-language_tools.js"></script>
+	<script type="text/javascript" src="https://pagecdn.io/lib/ace/1.4.12/ext-emmet.js"></script>
+
+	<script type="text/javascript" src="./Ace-Emmet/emmet.js"></script>
+
+	<script type="text/javascript" src="./Ace_PlugKit/plug-ace.js"></script>
+	<link rel="stylesheet" href="./Ace_PlugKit/plug-ace.css">
+
+
 	<script>mermaid.initialize({startOnLoad:true});</script>
 
 	<title>JS promise help</title>
@@ -841,5 +853,27 @@
 			</details>
 		</li>
 	</ol>
+
+	<script type="text/javascript">
+		!function() {
+			document.querySelectorAll(".ace-plug-js").forEach((v) => {
+				PlugAce.retabulate(v);
+				PlugAce.plug(v, 
+					{
+						maxLines: 30,
+						syntax: "javascript", 
+						syntaxMark: "js",
+					});
+			});
+			document.querySelectorAll(".ace-plug-html").forEach((v) => {
+				PlugAce.retabulate(v);
+				PlugAce.plug(v, 
+					{
+						maxLines: 30,
+						syntax: "html", 
+					});
+			});
+		}();
+	</script>
 </body>
 </html>
