@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style>
+		body {
+			margin: 100px 100px 500px 100px;
+		}
+	</style>
+
+	<style>
+		.mermaid {
+			filter: blur(10px);
+		}
+		.mermaid[data-processed="true"] {
+			filter: none;
+		}
+	</style>
+
+	<script src="http://MermaidJS/_archive_/v8.9.1/from-GitHub/mermaid-develop/dist/mermaid.js"></script>
+	<script>mermaid.initialize({startOnLoad:true});</script>
+
+	<title>JS promise help</title>
+</head>
+<body>
+	<h1>JS promise help</h1>
+	<ol>
+		<li>
+			<h2>Пустой прамес</h2>
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph "Promise.resolve ( ... )"
+						no_hand["#32; empty "]
+					end
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					var pA = Promise.resolve();
+					var pB = Promise.resolve("value");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph "Promise.reject ( ... )"
+						no_hand["#32; empty "]
+					end
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					var pA = Promise.reject();
+					var pB = Promise.reject(new Error());
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2>Прамес с экзекутором</h2>
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync
+						ex_async
+					end
+					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					var pA = new Promise ((rs, rj) => {
+						console.log("executor - sync");
+				
+						setTimeout(() => {
+							console.log("executor - async");
+							rs();
+						}, 200);
+					});
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2>Прамес с обработчиками статуса</h2>
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph ".then ( ... )"
+						s_hand
+						e_hand
+					end
+					s_hand["success <br> handler"]
+					e_hand["error <br> handler"]
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					var pB = pA.then (
+						(v) => {
+							console.log(v);
+							return v;
+						},
+						(e) => {
+							console.error("-catched-", e);
+							return e;
+						}
+					);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2>Цепочка из двух прамесов</h2>
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync
+						ex_async
+					end
+					subgraph ".then ( ... )"
+						s_hand
+						e_hand
+					end
+					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
+					ex_async==>|"resolve()"|s_hand["success <br> handler"]
+					ex_async-.->|"reject()"|e_hand["error <br> handler"]
+					ex_sync-.->|"err"|e_hand["error <br> handler"]
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor");
+						setTimeout(rs, 200);
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2>Прамесы с одним каллбеком</h2>
+			
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync
+						ex_async
+					end
+					subgraph ".then ( ... )"
+						s_hand
+						no_hand
+					end
+					subgraph ".catch ( ... )"
+						no_hand_2
+						e_hand_2
+					end
+					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
+					ex_async==>|"resolve()"|s_hand["success <br> handler"]
+					ex_async-.->|"reject()"|no_hand["empty"]
+					ex_sync-.->|"err"|no_hand
+					s_hand==>no_hand_2["empty"]
+					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
+					no_hand-->e_hand_2
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						setTimeout(rs, 200);
+						throw new Error();
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							}
+						).
+						catch (
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+				
+					console.log("end of tread");
+				</div>
+			</details>
+		</li>
+		<li>
+			<h2>Использование <code>.then(null, ..)</code> вместо <code>.catch(...)</code></h2>
+			
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync
+						ex_async
+					end
+					subgraph ".then ( ... )"
+						s_hand
+						no_hand
+					end
+					subgraph ".then (null, ... )"
+						no_hand_2
+						e_hand_2
+					end
+					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
+					ex_async==>|"resolve()"|s_hand["success <br> handler"]
+					ex_async-.->|"reject()"|no_hand["empty"]
+					ex_sync-.->|"err"|no_hand
+					s_hand==>no_hand_2["empty"]
+					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
+					no_hand-->e_hand_2
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						setTimeout(rs, 200);
+						throw new Error();
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							}
+						).
+						then (       // .then(null, ...) instead .catch(...)
+							null,
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+				
+					console.log("end of tread");
+				</div>
+			</details>
+		</li>
+		<li>
+			<h2>Длинная цепочка</h2>
+			
+			<div class="mermaid">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync
+						ex_async
+					end
+
+					subgraph ".then ( ... )"
+						s_hand
+						e_hand
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_2
+						e_hand_2
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_3
+						e_hand_3
+					end
+
+					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
+					ex_async==>|"resolve()"|s_hand["success <br> handler"]
+					ex_async-.->|"reject()"|e_hand["error <br> handler"]
+					s_hand_2-.->|"err"|e_hand_3["error <br> handler 3"]
+					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
+					s_hand==>s_hand_2["success <br> handler 2"]
+					s_hand_2==>s_hand_3["success <br> handler 3"]
+					ex_sync-.->|"err"|e_hand["error <br> handler"]
+					e_hand==>s_hand_2
+					e_hand-.->|"err"|e_hand_2
+					e_hand_2==>s_hand_3
+					e_hand_2-.->|"err"|e_hand_3
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3,no_hand_4 empty-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor");
+						setTimeout(rs, 200);
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2>Длинная цепочка с отсутствующим каллбеком <code>onReject()</code></h2>
+			
+			<div class="mermaid">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync
+						ex_async
+					end
+
+					subgraph ".then ( ... )"
+						s_hand
+						e_hand
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_2
+						no_hand_2
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_3
+						e_hand_3
+					end
+
+					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
+					ex_async==>|"resolve()"|s_hand["success <br> handler"]
+					ex_async-.->|"reject()"|e_hand["error <br> handler"]
+					s_hand_2-.->|"err"|e_hand_3["error <br> handler 3"]
+					s_hand-.->|"err"|no_hand_2["empty"]
+					s_hand==>s_hand_2["success <br> handler 2"]
+					s_hand_2==>s_hand_3["success <br> handler 3"]
+					ex_sync-.->|"err"|e_hand["error <br> handler"]
+					e_hand==>s_hand_2
+					e_hand-.->|"err"|no_hand_2
+					no_hand_2-->e_hand_3
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor");
+						setTimeout(rs, 200);
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2>Длинная цепочка с отсутствующим каллбеком <code>onResolve()</code></h2>
+			
+			<div class="mermaid">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync
+						ex_async
+					end
+
+					subgraph ".then ( ... )"
+						s_hand
+						e_hand
+					end
+
+					subgraph ".catch ( ... )"
+						no_hand_2
+						e_hand_2
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_3
+						e_hand_3
+					end
+
+					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
+					ex_async==>|"resolve()"|s_hand["success <br> handler"]
+					ex_async-.->|"reject()"|e_hand["error <br> handler"]
+					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
+					s_hand==>no_hand_2["empty"]
+					no_hand_2-->s_hand_3["success <br> handler 3"]
+					ex_sync-.->|"err"|e_hand["error <br> handler"]
+					e_hand==>no_hand_2
+					e_hand-.->|"err"|e_hand_2
+					e_hand_2==>s_hand_3
+					e_hand_2-.->|"err"|e_hand_3["error <br> handler 3"]
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+			</div>
+			<details>
+				<summary>код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor");
+						setTimeout(rs, 200);
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						catch (
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2>Вставка прамеса в цепочку</h2>
+			
+			<div class="mermaid">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync["sync"]
+						ex_async["async"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
+					end
+
+					subgraph "return new Promise ( ... )"
+						ex_sync_2["sync"]
+						ex_async_2["async"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_3["success <br> handler 3"]
+						e_hand_3["error <br> handler 3"]
+					end
+
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|e_hand
+					s_hand==>ex_sync_2
+					ex_sync_2-->|" ... t ... "|ex_async_2
+					ex_sync-.->|"err"|e_hand
+					e_hand==>s_hand_3
+					ex_async_2==>|"resolve()"|s_hand_3
+					ex_async_2-.->|"reject()"|e_hand_3
+					ex_sync_2-.->|"err"|e_hand_3
+					e_hand-.->|"err"|e_hand_3
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+			</div>
+			<details>
+				<summary>Код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor - sync");
+						setTimeout(rs, 200);
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return new Promise ((rs, rj) => {
+									console.log("executor-2 - sync");
+									setTimeout(rs, 200);
+								});
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2>Вставка цепочки прамесов в цепочку</h2>
+			
+			<div class="mermaid">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync["sync"]
+						ex_async["async"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
+					end
+
+					subgraph "return new Promise ( ... )"
+						ex_sync_2["sync"]
+						ex_async_2["async"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_2["success <br> handler 2"]
+						e_hand_2["error <br> handler 2"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_3["success <br> handler 3"]
+						e_hand_3["error <br> handler 3"]
+					end
+
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|e_hand
+					s_hand==>ex_sync_2
+					ex_sync_2-->|" ... t ... "|ex_async_2
+					ex_sync-.->|"err"|e_hand
+					e_hand==>s_hand_3
+					ex_async_2==>|"resolve()"|s_hand_2
+					ex_async_2-.->|"reject()"|e_hand_2
+					ex_sync_2-.->|"err"|e_hand_2
+					s_hand_2==>s_hand_3
+					e_hand_2-.->|"err"|e_hand_3
+					e_hand-.->|"err"|e_hand_3
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+			</div>
+			<details>
+				<summary>Код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor - sync");
+						setTimeout(rs, 200);
+						throw new Error();
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return new Promise ((rs, rj) => {
+									console.log("executor-2 - sync");
+									setTimeout(rs, 200);
+								}).then(
+									(v) => {
+										console.log(v);
+										return v;
+									},
+									(e) => {
+										console.error("-catched-", e);
+										return e;
+									}
+								);
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2><code>.finally(...)</code></h2>
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync["sync"]
+						ex_async["async"]
+					end
+					subgraph ".finally ( ... )"
+						fin_hand["all <br> status <br> handler"]
+					end
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|fin_hand
+					ex_async-.->|"reject()"|fin_hand
+					ex_sync-.->|"err"|fin_hand
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+					classDef fin-block fill:#fe8,stroke:#da0
+					class fin_hand fin-block
+
+			</div>
+			<details>
+				<summary>Код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor - sync");
+
+						setTimeout(() => {
+							console.log("executor - async");
+							rs();
+						}, 200);
+					}).
+						finally(
+							() => {
+								console.log("-finaly-");
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
+			<h2><code>.finally(...).then(...)</code></h2>
+			<div class="mermaid" style="text-align: left;">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync["sync"]
+						ex_async["async"]
+					end
+
+					subgraph ".finally ( ... )"
+						fin_hand["all <br> status <br> handler"]
+					end
+					subgraph ".then ( ... )"
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
+					end
+
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|fin_hand
+					ex_async-.->|"reject()"|fin_hand
+					ex_sync-.->|"err"|fin_hand
+					fin_hand==>s_hand
+					fin_hand-.->e_hand
+
+					classDef err-block fill:#fde,stroke:#e77
+					class e_hand,e_hand_2 err-block
+
+					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+					classDef fin-block fill:#fe8,stroke:#da0
+					class fin_hand fin-block
+
+			</div>
+			<details>
+				<summary>Код</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor - sync");
+
+						setTimeout(() => {
+							console.log("executor - async");
+							rs();
+						}, 200);
+					}).
+						finally(
+							() => {
+								console.log("-finaly-");
+							}
+						).
+						then(
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+	</ol>
+</body>
+</html>
