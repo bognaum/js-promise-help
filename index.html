@@ -34,7 +34,7 @@
 	<h1>JS promise help</h1>
 	<ol>
 		<li>
-			<h2>An empty promise</h2>
+			<h2>An empty promise (without callbacks)</h2>
 			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "Promise.resolve ( ... )"
@@ -49,8 +49,8 @@
 				<summary>code</summary>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
-					var pA = Promise.resolve();
-					var pB = Promise.resolve("value");
+					var promiseA = Promise.resolve();
+					var promiseB = Promise.resolve("value");
 				</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
@@ -68,8 +68,8 @@
 				<summary>code</summary>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
-					var pA = Promise.reject();
-					var pB = Promise.reject(new Error());
+					var promiseA = Promise.reject();
+					var promiseB = Promise.reject(new Error());
 				</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
@@ -91,13 +91,16 @@
 				<summary>code</summary>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
-					var pA = new Promise ((rs, rj) => {
+					var promiseA = new Promise ((rs, rj) => {
 						console.log("executor - sync");
-				
-						setTimeout(() => {
-							console.log("executor - async");
-							rs();
-						}, 200);
+						
+						setTimeout(
+							() => {
+								console.log("executor - async");
+								rs("value"); 
+							}, 
+							1000
+						);
 					});
 				</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
@@ -121,7 +124,7 @@
 				<summary>code</summary>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
-					var pB = pA.then (
+					var promiseB = promiseA.then (
 						(v) => {
 							console.log(v);
 							return v;
@@ -162,7 +165,7 @@
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor");
-						setTimeout(rs, 200);
+						setTimeout(() => { rs(); }, 1000);
 					}).
 						then (
 							(v) => {
@@ -214,8 +217,8 @@
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
-						setTimeout(rs, 200);
-						throw new Error();
+						console.log("executor");
+						setTimeout(() => { rs(); }, 1000);
 					}).
 						then (
 							(v) => {
@@ -270,7 +273,6 @@
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						setTimeout(rs, 200);
-						throw new Error();
 					}).
 						then (
 							(v) => {
