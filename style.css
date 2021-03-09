@@ -50,6 +50,6 @@ body.dark #pr_scheme.mermaid .empty-block >* {
 	stroke-dasharray: 5,5;
 }
 body.dark #pr_scheme.mermaid .fin-block   >* {
-	fill: #420;
-	stroke: #fb5;
+	fill: #330;
+	stroke: #ec6;
 }
