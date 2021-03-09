@@ -52,7 +52,7 @@
 	<h1>JS promise help</h1>
 	<ol>
 		<li>
-			<h2>Пустой прамес</h2>
+			<h2>An empty promise</h2>
 			<div class="mermaid" style="text-align: left;">
 				graph LR
 					subgraph "Promise.resolve ( ... )"
@@ -97,7 +97,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Прамес с экзекутором</h2>
+			<h2>A promise with executor</h2>
 			<div class="mermaid" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
@@ -127,7 +127,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Прамес с обработчиками статуса</h2>
+			<h2>A promise with status handlers</h2>
 			<div class="mermaid" style="text-align: left;">
 				graph LR
 					subgraph ".then ( ... )"
@@ -161,7 +161,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Цепочка из двух прамесов</h2>
+			<h2>A chain with two promises</h2>
 			<div class="mermaid" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
@@ -205,7 +205,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Прамесы с одним каллбеком</h2>
+			<h2>A promises with one handler</h2>
 			
 			<div class="mermaid" style="text-align: left;">
 				graph LR
@@ -262,7 +262,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Использование <code>.then(null, ..)</code> вместо <code>.catch(...)</code></h2>
+			<h2>Using <code>.then(null, ..)</code> instead <code>.catch(...)</code></h2>
 			
 			<div class="mermaid" style="text-align: left;">
 				graph LR
@@ -320,7 +320,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Длинная цепочка</h2>
+			<h2>A long chain</h2>
 			
 			<div class="mermaid">
 				graph LR
@@ -408,7 +408,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Длинная цепочка с отсутствующим каллбеком <code>onReject()</code></h2>
+			<h2>A long chain without one <code>onReject()</code> handler</h2>
 			
 			<div class="mermaid">
 				graph LR
@@ -491,7 +491,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Длинная цепочка с отсутствующим каллбеком <code>onResolve()</code></h2>
+			<h2>A long chain without one <code>onResolve()</code> handler</h2>
 			
 			<div class="mermaid">
 				graph LR
@@ -574,7 +574,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Вставка прамеса в цепочку</h2>
+			<h2>Inserting a promise to the chain</h2>
 			
 			<div class="mermaid">
 				graph LR
@@ -654,7 +654,7 @@
 			</details>
 		</li>
 		<li>
-			<h2>Вставка цепочки прамесов в цепочку</h2>
+			<h2>Inserting a promise chain to the chain</h2>
 			
 			<div class="mermaid">
 				graph LR
