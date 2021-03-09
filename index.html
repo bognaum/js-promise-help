@@ -19,11 +19,16 @@
 	<link rel="stylesheet" href="./Ace_PlugKit/plug-ace.css">
 
 
-	<script>mermaid.initialize({startOnLoad:true});</script>
+	<script>
+		mermaid.initialize({
+			startOnLoad:true,
+			theme: "dark"
+		});
+	</script>
 
 	<title>JS promise help</title>
 </head>
-<body>
+<body class="dark">
 	<h1>JS promise help</h1>
 	<ol>
 		<li>
@@ -823,6 +828,7 @@
 						maxLines: 30,
 						syntax: "javascript", 
 						syntaxMark: "js",
+						theme: "idle_fingers",
 					});
 			});
 			document.querySelectorAll(".ace-plug-html").forEach((v) => {
@@ -831,6 +837,7 @@
 					{
 						maxLines: 30,
 						syntax: "html", 
+						theme: "idle_fingers",
 					});
 			});
 		}();

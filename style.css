@@ -21,16 +21,35 @@ body>ol>li::marker {
 	filter: none;
 }
 
-#pr_scheme.mermaid .err-block   >* {
+body.lite #pr_scheme.mermaid .err-block   >* {
 	fill: #fde;
 	stroke: #e77;
 }
-#pr_scheme.mermaid .empty-block >* {
+body.lite #pr_scheme.mermaid .empty-block >* {
 	fill: transparent;
 	stroke: #333;
 	stroke-dasharray: 5,5;
 }
-#pr_scheme.mermaid .fin-block   >* {
+body.lite #pr_scheme.mermaid .fin-block   >* {
 	fill: #fc0;
 	stroke: #c60;
+}
+
+body.dark {
+	background-color: #222;
+	color: #ccc;
+}
+
+body.dark #pr_scheme.mermaid .err-block   >* {
+	fill: #422;
+	stroke: #f99;
+}
+body.dark #pr_scheme.mermaid .empty-block >* {
+	fill: transparent;
+	stroke: #fff;
+	stroke-dasharray: 5,5;
+}
+body.dark #pr_scheme.mermaid .fin-block   >* {
+	fill: #420;
+	stroke: #fb5;
 }
