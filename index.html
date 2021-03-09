@@ -79,10 +79,11 @@
 			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
-						ex_sync
-						ex_async
+						ex_sync["sync"]
+						ex_async["async"]
 					end
-					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
+					
+					ex_sync-->|" ... t ... "|ex_async
 
 					class e_hand,e_hand_2 err-block
 
@@ -111,11 +112,9 @@
 			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph ".then ( ... )"
-						s_hand
-						e_hand
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
 					end
-					s_hand["success <br> handler"]
-					e_hand["error <br> handler"]
 
 					class e_hand,e_hand_2 err-block
 
@@ -144,17 +143,17 @@
 			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
-						ex_sync
-						ex_async
+						ex_sync["sync"]
+						ex_async["async"]
 					end
 					subgraph ".then ( ... )"
-						s_hand
-						e_hand
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
 					end
-					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
-					ex_async==>|"resolve()"|s_hand["success <br> handler"]
-					ex_async-.->|"reject()"|e_hand["error <br> handler"]
-					ex_sync-.->|"err"|e_hand["error <br> handler"]
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|e_hand
+					ex_sync-.->|"err"|e_hand
 
 					class e_hand,e_hand_2 err-block
 
@@ -188,23 +187,23 @@
 			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
-						ex_sync
-						ex_async
+						ex_sync["sync"]
+						ex_async["async"]
 					end
 					subgraph ".then ( ... )"
-						s_hand
-						no_hand
+						s_hand["success <br> handler"]
+						no_hand["empty"]
 					end
 					subgraph ".catch ( ... )"
-						no_hand_2
-						e_hand_2
+						no_hand_2["empty"]
+						e_hand_2["error <br> handler 2"]
 					end
-					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
-					ex_async==>|"resolve()"|s_hand["success <br> handler"]
-					ex_async-.->|"reject()"|no_hand["empty"]
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|no_hand
 					ex_sync-.->|"err"|no_hand
-					s_hand==>no_hand_2["empty"]
-					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
+					s_hand==>no_hand_2
+					s_hand-.->|"err"|e_hand_2
 					no_hand-->e_hand_2
 
 					class e_hand,e_hand_2 err-block
@@ -243,23 +242,23 @@
 			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
-						ex_sync
-						ex_async
+						ex_sync["sync"]
+						ex_async["async"]
 					end
 					subgraph ".then ( ... )"
-						s_hand
-						no_hand
+						s_hand["success <br> handler"]
+						no_hand["empty"]
 					end
 					subgraph ".then (null, ... )"
-						no_hand_2
-						e_hand_2
+						no_hand_2["empty"]
+						e_hand_2["error <br> handler 2"]
 					end
-					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
-					ex_async==>|"resolve()"|s_hand["success <br> handler"]
-					ex_async-.->|"reject()"|no_hand["empty"]
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|no_hand
 					ex_sync-.->|"err"|no_hand
-					s_hand==>no_hand_2["empty"]
-					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
+					s_hand==>no_hand_2
+					s_hand-.->|"err"|e_hand_2
 					no_hand-->e_hand_2
 
 					class e_hand,e_hand_2 err-block
@@ -298,33 +297,33 @@
 			<div class="mermaid" id="pr_scheme">
 				graph LR
 					subgraph "new Promise ( ... )"
-						ex_sync
-						ex_async
+						ex_sync["sync"]
+						ex_async["async"]
 					end
 
 					subgraph ".then ( ... )"
-						s_hand
-						e_hand
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
 					end
 
 					subgraph ".then ( ... )"
-						s_hand_2
-						e_hand_2
+						s_hand_2["success <br> handler 2"]
+						e_hand_2["error <br> handler 2"]
 					end
 
 					subgraph ".then ( ... )"
-						s_hand_3
-						e_hand_3
+						s_hand_3["success <br> handler 3"]
+						e_hand_3["error <br> handler 3"]
 					end
 
-					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
-					ex_async==>|"resolve()"|s_hand["success <br> handler"]
-					ex_async-.->|"reject()"|e_hand["error <br> handler"]
-					s_hand_2-.->|"err"|e_hand_3["error <br> handler 3"]
-					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
-					s_hand==>s_hand_2["success <br> handler 2"]
-					s_hand_2==>s_hand_3["success <br> handler 3"]
-					ex_sync-.->|"err"|e_hand["error <br> handler"]
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|e_hand
+					s_hand_2-.->|"err"|e_hand_3
+					s_hand-.->|"err"|e_hand_2
+					s_hand==>s_hand_2
+					s_hand_2==>s_hand_3
+					ex_sync-.->|"err"|e_hand
 					e_hand==>s_hand_2
 					e_hand-.->|"err"|e_hand_2
 					e_hand_2==>s_hand_3
@@ -384,39 +383,38 @@
 			<div class="mermaid" id="pr_scheme">
 				graph LR
 					subgraph "new Promise ( ... )"
-						ex_sync
-						ex_async
+						ex_sync["sync"]
+						ex_async["async"]
 					end
 
 					subgraph ".then ( ... )"
-						s_hand
-						e_hand
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
 					end
 
 					subgraph ".then ( ... )"
-						s_hand_2
-						no_hand_2
+						s_hand_2["success <br> handler 2"]
+						no_hand_2["empty"]
 					end
 
 					subgraph ".then ( ... )"
-						s_hand_3
-						e_hand_3
+						s_hand_3["success <br> handler 3"]
+						e_hand_3["error <br> handler 3"]
 					end
 
-					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
-					ex_async==>|"resolve()"|s_hand["success <br> handler"]
-					ex_async-.->|"reject()"|e_hand["error <br> handler"]
-					s_hand_2-.->|"err"|e_hand_3["error <br> handler 3"]
-					s_hand-.->|"err"|no_hand_2["empty"]
-					s_hand==>s_hand_2["success <br> handler 2"]
-					s_hand_2==>s_hand_3["success <br> handler 3"]
-					ex_sync-.->|"err"|e_hand["error <br> handler"]
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|e_hand
+					s_hand_2-.->|"err"|e_hand_3
+					s_hand-.->|"err"|no_hand_2
+					s_hand==>s_hand_2
+					s_hand_2==>s_hand_3
+					ex_sync-.->|"err"|e_hand
 					e_hand==>s_hand_2
 					e_hand-.->|"err"|no_hand_2
 					no_hand_2-->e_hand_3
 
 					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
-
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -465,39 +463,38 @@
 			<div class="mermaid" id="pr_scheme">
 				graph LR
 					subgraph "new Promise ( ... )"
-						ex_sync
-						ex_async
+						ex_sync["sync"]
+						ex_async["async"]
 					end
 
 					subgraph ".then ( ... )"
-						s_hand
-						e_hand
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
 					end
 
 					subgraph ".catch ( ... )"
 						no_hand_2
-						e_hand_2
+						e_hand_2["error <br> handler 2"]
 					end
 
 					subgraph ".then ( ... )"
-						s_hand_3
-						e_hand_3
+						s_hand_3["success <br> handler 3"]
+						e_hand_3["error <br> handler 3"]
 					end
 
-					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
-					ex_async==>|"resolve()"|s_hand["success <br> handler"]
-					ex_async-.->|"reject()"|e_hand["error <br> handler"]
-					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|e_hand
+					s_hand-.->|"err"|e_hand_2
 					s_hand==>no_hand_2["empty"]
-					no_hand_2-->s_hand_3["success <br> handler 3"]
-					ex_sync-.->|"err"|e_hand["error <br> handler"]
+					no_hand_2-->s_hand_3
+					ex_sync-.->|"err"|e_hand
 					e_hand==>no_hand_2
 					e_hand-.->|"err"|e_hand_2
 					e_hand_2==>s_hand_3
-					e_hand_2-.->|"err"|e_hand_3["error <br> handler 3"]
+					e_hand_2-.->|"err"|e_hand_3
 
 					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
-
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
