@@ -31,6 +31,6 @@ body>ol>li::marker {
 	stroke-dasharray: 5,5;
 }
 #pr_scheme.mermaid .fin-block   >* {
-	fill: #fe8;
-	stroke: #da0;
+	fill: #fc0;
+	stroke: #c60;
 }
