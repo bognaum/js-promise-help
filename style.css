@@ -20,3 +20,17 @@ body>ol>li::marker {
 .mermaid[data-processed="true"] {
 	filter: none;
 }
+
+#pr_scheme.mermaid .err-block   >* {
+	fill: #fde;
+	stroke: #e77;
+}
+#pr_scheme.mermaid .empty-block >* {
+	fill: transparent;
+	stroke: #333;
+	stroke-dasharray: 5,5;
+}
+#pr_scheme.mermaid .fin-block   >* {
+	fill: #fe8;
+	stroke: #da0;
+}

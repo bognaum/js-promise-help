@@ -28,15 +28,13 @@
 	<ol>
 		<li>
 			<h2>An empty promise</h2>
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "Promise.resolve ( ... )"
 						no_hand["#32; empty "]
 					end
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -49,15 +47,13 @@
 				</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "Promise.reject ( ... )"
 						no_hand["#32; empty "]
 					end
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -73,7 +69,7 @@
 		</li>
 		<li>
 			<h2>A promise with executor</h2>
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync
@@ -81,7 +77,6 @@
 					end
 					ex_sync["sync"]-->|" ... t ... "|ex_async["async"]
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
 
 			</div>
@@ -103,7 +98,7 @@
 		</li>
 		<li>
 			<h2>A promise with status handlers</h2>
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph ".then ( ... )"
 						s_hand
@@ -112,7 +107,6 @@
 					s_hand["success <br> handler"]
 					e_hand["error <br> handler"]
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
 
 			</div>
@@ -137,7 +131,7 @@
 		</li>
 		<li>
 			<h2>A chain with two promises</h2>
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync
@@ -152,7 +146,6 @@
 					ex_async-.->|"reject()"|e_hand["error <br> handler"]
 					ex_sync-.->|"err"|e_hand["error <br> handler"]
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
 
 			</div>
@@ -182,7 +175,7 @@
 		<li>
 			<h2>A promises with one handler</h2>
 			
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync
@@ -204,10 +197,8 @@
 					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
 					no_hand-->e_hand_2
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -239,7 +230,7 @@
 		<li>
 			<h2>Using <code>.then(null, ..)</code> instead <code>.catch(...)</code></h2>
 			
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync
@@ -261,10 +252,8 @@
 					s_hand-.->|"err"|e_hand_2["error <br> handler 2"]
 					no_hand-->e_hand_2
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -297,7 +286,7 @@
 		<li>
 			<h2>A long chain</h2>
 			
-			<div class="mermaid">
+			<div class="mermaid" id="pr_scheme">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync
@@ -332,10 +321,8 @@
 					e_hand_2==>s_hand_3
 					e_hand_2-.->|"err"|e_hand_3
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3,no_hand_4 empty-block
 
 			</div>
@@ -385,7 +372,7 @@
 		<li>
 			<h2>A long chain without one <code>onReject()</code> handler</h2>
 			
-			<div class="mermaid">
+			<div class="mermaid" id="pr_scheme">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync
@@ -419,10 +406,8 @@
 					e_hand-.->|"err"|no_hand_2
 					no_hand_2-->e_hand_3
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -468,7 +453,7 @@
 		<li>
 			<h2>A long chain without one <code>onResolve()</code> handler</h2>
 			
-			<div class="mermaid">
+			<div class="mermaid" id="pr_scheme">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync
@@ -502,10 +487,8 @@
 					e_hand_2==>s_hand_3
 					e_hand_2-.->|"err"|e_hand_3["error <br> handler 3"]
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -551,7 +534,7 @@
 		<li>
 			<h2>Inserting a promise to the chain</h2>
 			
-			<div class="mermaid">
+			<div class="mermaid" id="pr_scheme">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync["sync"]
@@ -585,10 +568,8 @@
 					ex_sync_2-.->|"err"|e_hand_3
 					e_hand-.->|"err"|e_hand_3
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -631,7 +612,7 @@
 		<li>
 			<h2>Inserting a promise chain to the chain</h2>
 			
-			<div class="mermaid">
+			<div class="mermaid" id="pr_scheme">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync["sync"]
@@ -672,10 +653,8 @@
 					e_hand_2-.->|"err"|e_hand_3
 					e_hand-.->|"err"|e_hand_3
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
 			</div>
@@ -727,7 +706,7 @@
 		</li>
 		<li>
 			<h2><code>.finally(...)</code></h2>
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync["sync"]
@@ -741,13 +720,10 @@
 					ex_async-.->|"reject()"|fin_hand
 					ex_sync-.->|"err"|fin_hand
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
-					classDef fin-block fill:#fe8,stroke:#da0
 					class fin_hand fin-block
 
 			</div>
@@ -775,7 +751,7 @@
 		</li>
 		<li>
 			<h2><code>.finally(...).then(...)</code></h2>
-			<div class="mermaid" style="text-align: left;">
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
 					subgraph "new Promise ( ... )"
 						ex_sync["sync"]
@@ -797,13 +773,10 @@
 					fin_hand==>s_hand
 					fin_hand-.->e_hand
 
-					classDef err-block fill:#fde,stroke:#e77
 					class e_hand,e_hand_2 err-block
 
-					classDef empty-block fill:transparent,stroke:#333,stroke-dasharray:5,5
 					class no_hand,no_hand_2,no_hand_3 empty-block
 
-					classDef fin-block fill:#fe8,stroke:#da0
 					class fin_hand fin-block
 
 			</div>
