@@ -1,0 +1,22 @@
+body {
+	margin: 100px 100px 500px 100px;
+}
+summary {
+	display: inline-block;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+details[open]>summary {
+	display: block;
+}
+body>ol>li::marker {
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+.mermaid {
+	filter: blur(10px);
+}
+.mermaid[data-processed="true"] {
+	filter: none;
+}
