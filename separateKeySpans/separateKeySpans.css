@@ -1,0 +1,17 @@
+span.single-key {
+  line-height: 2em;
+  font-weight: normal;
+  background-color: #555;
+  border-radius: 3px;
+  box-shadow: inset 0 0 5px #aaa, inset 0 0 5px #aaa, 0 0 3px #aaa;
+  margin: 5px;
+  vertical-align: middle;
+  padding: 2px 5px;
+  text-shadow: 0 0 1px #aaa;
+  cursor: pointer; }
+  span.single-key:active {
+    box-shadow: inset 0 0 10px #aaa, inset 0 0 10px #aaa;
+    position: relative;
+    top: 1px; }
+
+/*# sourceMappingURL=separateKeySpans.css.map */

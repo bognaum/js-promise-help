@@ -1,0 +1,26 @@
+span.single-key{
+	line-height: 2em;
+	font-weight: normal;
+	background-color: #555;
+	// background: linear-gradient(to bottom, #ccc, #fff);
+	border-radius: 3px;
+	box-shadow: 
+		// 2px 2px 5px #333,
+		inset 0 0 5px #aaa,
+		inset 0 0 5px #aaa,
+		0 0 3px #aaa,
+	;
+	margin: 5px;
+	vertical-align: middle;
+	padding: 2px 5px;
+	text-shadow: 0 0 1px #aaa;
+	cursor: pointer;
+	&:active{
+		box-shadow: 
+			inset 0 0 10px #aaa,
+			inset 0 0 10px #aaa
+		;
+		position: relative;
+		top: 1px;
+	}
+}

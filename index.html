@@ -18,6 +18,9 @@
 	<script type="text/javascript" src="./Ace_PlugKit/plug-ace.js"></script>
 	<link rel="stylesheet" href="./Ace_PlugKit/plug-ace.css">
 
+	<link rel="stylesheet" type="text/css" href="/separateKeySpans/separateKeySpans.css">
+	<script type="text/javascript" src="/separateKeySpans/separateKeySpans.js"></script>
+
 
 	<script>
 		mermaid.initialize({
@@ -47,6 +50,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					var promiseA = Promise.resolve();
@@ -66,6 +70,8 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					var promiseA = Promise.reject();
@@ -90,6 +96,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					var promiseA = new Promise ((rs, rj) => {
@@ -121,6 +128,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					var promiseB = promiseA.then (
@@ -160,6 +168,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -213,6 +222,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -268,6 +278,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -336,6 +347,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -420,6 +432,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -500,6 +513,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -581,6 +595,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -666,6 +681,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -735,6 +751,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -788,6 +805,7 @@
 			</div>
 			<details>
 				<summary>code</summary>
+				<div class="key-binding-caption"><span class="keys">Ctrl+S</span> - evaluate.</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
@@ -821,16 +839,29 @@
 	</ol>
 
 	<script type="text/javascript">
+		separateKeySpans();
+	</script>
+
+	<script type="text/javascript">
 		!function() {
 			document.querySelectorAll(".ace-plug-js").forEach((v) => {
 				PlugAce.retabulate(v);
-				PlugAce.plug(v, 
+				editor = PlugAce.plug(v, 
 					{
 						maxLines: 30,
 						syntax: "javascript", 
 						syntaxMark: "js",
 						theme: "idle_fingers",
 					});
+				editor.commands.addCommands([{
+					name: "evakuate",
+					bindKey: {win: "Ctrl-s", mac: "Command-s"},
+					exec: function(editor) {
+						console.log("--- eval ---");
+						eval(editor.getValue());
+					},
+					readOnly: true,
+				}]); // Добавить меню настроек
 			});
 			document.querySelectorAll(".ace-plug-html").forEach((v) => {
 				PlugAce.retabulate(v);
