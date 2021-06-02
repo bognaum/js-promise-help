@@ -7,16 +7,16 @@ body.lite {
 	color: #ccc;
 
 	#pr_scheme.mermaid {
-		.err-block {
+		.err-block>* {
 			fill: #fde;
 			stroke: #e77;
 		}
-		.empty-block {
+		.empty-block>* {
 			fill: transparent;
 			stroke: #333;
 			stroke-dasharray: 5,5;
 		}
-		.fin-block {
+		.fin-block>* {
 			fill: #fc0;
 			stroke: #c60;
 		}
@@ -28,16 +28,16 @@ body.dark {
 	color: #ccc;
 
 	#pr_scheme.mermaid {
-		.err-block {
+		.err-block>* {
 			fill: #422;
 			stroke: #f99;
 		}
-		.empty-block {
+		.empty-block>* {
 			fill: transparent;
 			stroke: #fff;
 			stroke-dasharray: 5,5;
 		}
-		.fin-block {
+		.fin-block>* {
 			fill: #330;
 			stroke: #ec6;
 		}
