@@ -1,0 +1,67 @@
+body {
+	margin: 100px 100px 500px 100px;
+}
+
+body.lite {
+	background-color: #222;
+	color: #ccc;
+
+	#pr_scheme.mermaid {
+		.err-block {
+			fill: #fde;
+			stroke: #e77;
+		}
+		.empty-block {
+			fill: transparent;
+			stroke: #333;
+			stroke-dasharray: 5,5;
+		}
+		.fin-block {
+			fill: #fc0;
+			stroke: #c60;
+		}
+	}
+}
+
+body.dark {
+	background-color: #222;
+	color: #ccc;
+
+	#pr_scheme.mermaid {
+		.err-block {
+			fill: #422;
+			stroke: #f99;
+		}
+		.empty-block {
+			fill: transparent;
+			stroke: #fff;
+			stroke-dasharray: 5,5;
+		}
+		.fin-block {
+			fill: #330;
+			stroke: #ec6;
+		}
+	}
+}
+
+summary {
+	display: inline-block;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-bottom: 1px solid #ccc;
+}
+
+details[open]>summary {
+	display: block;
+}
+body>ol>li::marker {
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+.mermaid {
+	filter: blur(10px);
+}
+.mermaid[data-processed="true"] {
+	filter: none;
+}
