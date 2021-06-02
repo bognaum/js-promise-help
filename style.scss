@@ -33,13 +33,21 @@ body.dark {
 			stroke: #f99;
 		}
 		.empty-block>* {
-			fill: transparent;
 			stroke: #fff;
 			stroke-dasharray: 5,5;
 		}
 		.fin-block>* {
 			fill: #330;
 			stroke: #ec6;
+		}
+		.syncro-seq-block>* {
+			fill: #555;
+			stroke: #ccc;
+		}
+		.promise-block>* {
+			fill: #333;
+			stroke: #555;
+			stroke-width: 3;
 		}
 	}
 }

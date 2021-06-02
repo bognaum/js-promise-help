@@ -821,6 +821,57 @@
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
+		<li>
+			<h2><code>async function</code></h2>
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
+				graph LR
+					subgraph "async function ... ( ... )"
+						ss1["syncro"]
+						pr1[" &nbsp; <br> promise <br> &nbsp; <br> "]
+						ss2["syncro"]
+						pr2[" &nbsp; <br> promise <br> &nbsp; <br> "]
+						ss3["syncro"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand["success <br> handler"]
+						e_hand["error <br> handler"]
+					end
+
+					ss1==>pr1
+					ss2==>pr2
+					pr1==>ss2
+					pr2==>ss3
+
+					ss3==>|return|s_hand
+
+					pr1-.->|err|e_hand
+					pr2-.->|err|e_hand
+
+					ss1-.->|err|e_hand
+					ss2-.->|err|e_hand
+					ss3-.->|err|e_hand
+
+					class e_hand,e_hand_2 err-block
+
+					class no_hand,no_hand_2,no_hand_3 empty-block
+
+					class fin_hand fin-block
+
+					class ss1,ss2,ss3 syncro-seq-block
+
+					class pr1,pr2,pr3 promise-block
+
+			</div>
+			<details>
+				<summary>code</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
 	</ol>
 
 	<script type="text/javascript">
