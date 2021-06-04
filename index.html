@@ -867,7 +867,19 @@
 				<summary>code</summary>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
-					
+					async function fA () {
+						console.log("1");
+						new Promise((rsl) => setTimeout(rsl));
+						console.log("1");
+						new Promise((rsl) => setTimeout(rsl));
+						console.log("1");
+						return "OK";
+					}
+
+					fA().then(
+						(result) => {console.log  (`result:`, result);},
+						(error)  => {console.error(`error:` , error); }
+					);
 				</div>
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
