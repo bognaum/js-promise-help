@@ -600,10 +600,6 @@
 							(v) => {
 								console.log(v);
 								return v;
-							},
-							(e) => {
-								console.error("-catched-", e);
-								return e;
 							}
 						).
 						then (
@@ -616,7 +612,9 @@
 							(v) => {
 								console.log(v);
 								return v;
-							},
+							}
+						).
+						catch (
 							(e) => {
 								console.error("-catched-", e);
 								return e;
