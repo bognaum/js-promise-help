@@ -541,6 +541,93 @@
 			</details>
 		</li>
 		<li>
+			<h2>A long chain with only one <code>onReject()</code> handler</h2>
+			
+			<div class="mermaid" id="pr_scheme">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync["sync"]
+						ex_async["async"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand["success <br> handler"]
+						no_hand["empty"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_2["success <br> handler 2"]
+						no_hand_2["empty"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_3["success <br> handler 3"]
+						no_hand_3["empty"]
+					end
+
+					subgraph ".catch ( ... )"
+						no_hand_4["empty"]
+						e_hand_4["error <br> handler 4"]
+					end
+
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand
+					ex_async-.->|"reject()"|no_hand
+					s_hand_2-.->|"err"|no_hand_3
+					s_hand-.->|"err"|no_hand_2
+					s_hand==>s_hand_2
+					s_hand_2==>s_hand_3
+					ex_sync-.->|"err"|no_hand
+					no_hand-->no_hand_2
+					no_hand_2-->no_hand_3
+					s_hand_3==>no_hand_4
+					s_hand_3-.->|"err"|e_hand_4
+					no_hand_3-->e_hand_4
+
+					class e_hand,e_hand_2,e_hand_3,e_hand_4 err-block
+					class no_hand,no_hand_2,no_hand_3,no_hand_4 empty-block
+
+			</div>
+			<details>
+				<summary>code</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					new Promise ((rs, rj) => {
+						console.log("executor");
+						setTimeout(rs, 200);
+					}).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							}
+						).
+						then (
+							(v) => {
+								console.log(v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
+		<li>
 			<h2>Inserting a promise to the chain</h2>
 			
 			<div class="mermaid" id="pr_scheme">
