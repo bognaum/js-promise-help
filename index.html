@@ -969,6 +969,43 @@
 				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
+		<li>
+			<h2><code>Catch an error from promise with 'tray-await-catch'.</code></h2>
+			<div class="mermaid" id="pr_scheme" style="text-align: left;">
+				graph LR
+					%% subgraph "try { <br>  &nbsp;&nbsp;&nbsp;&nbsp;  await ... <br>}"
+					subgraph "try { await ... }"
+						pr1[" &nbsp; <br> promise <br> &nbsp; <br> "]
+					end
+
+					subgraph "catch (err) { ... }"
+						e_hand["error handled script"]
+					end
+
+					pr1-.->|err|e_hand
+
+					class e_hand,e_hand_2 err-block
+
+					class pr1,pr2,pr3 promise-block
+
+			</div>
+			<details>
+				<summary>code</summary>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+				<div class="ace-plug-js">
+					try {
+						await new Promise((rsl, rj) => {
+							setTimeout(() => {
+								rj("An error.");
+							});
+						});
+					} catch (err) {
+						console.log(`err >>`, err);
+					}
+				</div>
+				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+			</details>
+		</li>
 	</ol>
 
 	<script type="text/javascript">
