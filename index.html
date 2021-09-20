@@ -1008,6 +1008,257 @@
 		</li>
 	</ol>
 
+	<style>
+		#tbl_1 ,
+		#tbl_1 tr td {
+			/*border: 1px solid #000;*/
+			border: 1px solid #444;
+		}
+		#tbl_1 td.result-fulfield.gliph ,
+		#tbl_1 td.result-rejected.gliph {
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 50%;
+			background-size: 40px;
+		}
+		#tbl_1 td.result-fulfield.gliph {
+			background-image: url(IMG/good-contour.svg);
+		}
+		#tbl_1 td.result-rejected.gliph {
+			background-image: url(IMG/bad-contour.svg);
+		}
+
+
+		#tbl_1 td.all-args:before ,
+		#tbl_1 td.arg-fulfield:before ,
+		#tbl_1 td.arg-rejected:before {
+			content: "";
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+		}
+		#tbl_1 td.all-args:before {
+			background-image: url(IMG/completed.svg);
+		}
+		#tbl_1 td.arg-fulfield:before {
+			background-image: url(IMG/good-contour.svg);
+		}
+		#tbl_1 td.arg-rejected:before {
+			background-image: url(IMG/bad-contour.svg);
+		}
+
+
+		#tbl_1 td.all-args:before ,
+		#tbl_1 td.all-args:before {
+			content: "";
+			width: 20px;
+			height: 20px;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			display: inline-block;
+		}
+		#tbl_1 td.all-args:before {
+			/*background-image: url(IMG/all.svg);*/
+		}
+
+
+		#tbl_1 td.can-not-be {
+			background: repeating-linear-gradient(
+				135deg, 
+				#444        0, 
+				#444        10px, 
+				transparent 10px, 
+				transparent 20px
+			);
+			text-shadow: 
+				0 0 10px #222,
+				0 0 10px #222,
+				0 0 10px #222,
+				0 0 10px #222,
+				0 0 10px #222;
+		}
+
+		#tbl_1 .selected-word {
+			/*font-style: italic;*/
+			/*text-shadow: 0 0 2px #0ff;*/
+			color: #eee;
+		}
+	</style>
+
+	<h1>Promise static methods</h1>
+
+	<table id="tbl_1" border="" cellpadding="5" cellspacing="0">
+		<tbody class="ta-c">
+			<!-- <tr>
+				<td class="ta-c" colspan="7">
+					<p></p>
+				</td>
+			</tr> -->
+			<tr>
+				<td class="ta-c" rowspan="2" colspan="2">
+					Method <br> <code>Promise....</code>
+				</td>
+				<td class="ta-c" rowspan="2">Common <br> status</td>
+				<td class="ta-c" colspan="3">Argument statuses:</td>
+				<td class="ta-c" rowspan="2">Response</td>
+			</tr>
+			<tr>
+				<td class="ta-c">settled</td>
+				<td class="ta-c">fulfilled</td>
+				<td class="ta-c">rejected</td>
+			</tr>
+			<tr>
+				<td rowspan="2" class="trn"></td>
+				<td rowspan="2" class="ta-r"><code>.all([...])</code></td>
+				<td class="result-fulfield gliph"></td>
+				<td class="all-args">
+					<p><b>all</b></p>
+				</td>
+				<td class="arg-fulfield">
+					<p><b>all</b></p>
+				</td>
+				<td class="arg-rejected arg-rejected">
+					<p><b>0</b></p>
+				</td>
+				<td>
+					<p>
+						An array of <span class="selected-word">VALUES</span> of <span class="selected-word">ALL</span> passed promises.
+					</p>
+					<p><code>[<span class="meta cb">value-1</span>, <span class="meta cb">value-2</span>, ...]</code></p>
+				</td>
+			</tr>
+			<tr>
+				<td class="result-rejected gliph"></td>
+				<td class="result-rejected all-args">
+					<p><b>?</b></p>
+				</td>
+				<td class="result-rejected arg-fulfield">
+					<p><b>?</b></p>
+				</td>
+				<td class="result-rejected arg-rejected">
+					<p><b>1</b></p>
+				</td>
+				<td class="result-rejected">
+					<p>The <span class="selected-word">ERROR</span> of the <span class="selected-word">FIRST</span> <span class="selected-word">REJECTED</span> promise.</p>
+					<p><code><span class="meta cb">error</span></code></p>
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="2" class="trn"></td>
+				<td rowspan="2" class="ta-r"><code>.allSettled([...])</code></td>
+				<td class="result-fulfield gliph"></td>
+				<td class="all-args" class="all-args">
+					<p><b>all</b></p>
+				</td>
+				<td class=" arg-fulfield">
+					<p><b>?</b></p>
+				</td>
+				
+				<td class="arg-rejected">
+					<p><b>?</b></p>
+				</td>
+				<td>
+					<p>
+						An array as next:
+					</p>
+					<p style="text-align: left;">
+						<code>[</code><br>
+						<code>    {</code><br>
+						<code>        status: "fulfilled",</code><br>
+						<code>        value: <span class="meta cb">value</span></code><br>
+						<code>    },</code><br>
+						<code>    {</code><br>
+						<code>        status: "rejected",</code><br>
+						<code>        reason: <span class="meta cb">error</span></code><br>
+						<code>    },</code><br>
+						<code>    { ... },</code><br>
+						<code>    ...</code><br>
+						<code>]</code><br>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td class="result-rejected gliph"></td>
+				<td class="result-rejected can-not-be" colspan="4"><p>Imposible</p></td>
+				<!-- <td class="result-rejected all-args"><p>---</p></td>
+				<td class="result-rejected arg-fulfield"><p>---</p></td>
+				<td class="result-rejected arg-rejected"><p>---</p></td>
+				<td class="result-rejected"><p>---</p></td> -->
+			</tr>
+			<tr>
+				<td rowspan="2" class="trn"></td>
+				<td rowspan="2" class="ta-r"><code>.any([...])</code></td>
+				<td class="result-fulfield gliph"></td>
+				<td class="all-args">
+					<p><b>?</b></p>
+				</td>
+				<td class=" arg-fulfield">
+					<p><b>1</b></p>
+				</td>
+
+				<td class="arg-rejected">
+					<p><b>?</b></p>
+				</td>
+				<td>
+					<p>The <span class="selected-word">VALUE</span> of a <span class="selected-word">FIRST</span> <span class="selected-word">FULFILLED</span> promise.</p>
+					<p><code><span class="meta cb">value</span></code></p>
+				</td>
+			</tr>
+			<tr>
+				<td class="result-rejected gliph"></td>
+				<td class="result-rejected all-args">
+					<p><b>all</b></p>
+				</td>
+				<td class="result-rejected arg-fulfield">
+					<p><b>0</b></p>
+				</td>
+				<td class="result-rejected arg-rejected">
+					<p><b>all</b></p>
+				</td>
+				<td class="result-rejected">
+					<p>The <code>AggregateError</code> error, that's generated by this method itself.</p>
+					<p><code><span class="meta cb">AggregateError</span></code></p>
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="2" class="trn"></td>
+				<td rowspan="2" class="ta-r"><code>.race([...])</code></td>
+				<td class="result-fulfield gliph"></td>
+				<td class="all-args">
+					<p><b>1</b></p>
+				</td>
+				<td class=" arg-fulfield">
+					<p><b>1</b></p>
+				</td>
+
+				<td class="arg-rejected">
+					<p><b>?</b></p>
+				</td>
+				<td>
+					<p>The <span class="selected-word">VALUE</span> of <span class="selected-word">FIRST</span> <span class="selected-word">FULFILLED</span> promise.</p>
+					<p><code><span class="meta cb">value</span></code></p>
+				</td>
+			</tr>
+			<tr>
+				<td class="result-rejected gliph"></td>
+				<td class="result-rejected all-args">
+					<p><b>1</b></p>
+				</td>
+				<td class="result-rejected arg-fulfield">
+					<p><b>?</b></p>
+				</td>
+				<td class="result-rejected arg-rejected">
+					<p><b>1</b></p>
+				</td>
+				<td class="result-rejected">
+					<p>The <span class="selected-word">ERROR</span> of <span class="selected-word">FIRST</span> <span class="selected-word">REJECTED</span> promise.</p>
+					<p><code><span class="meta cb">error</span></code></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
 	<script type="text/javascript">
 		separateKeySpans();
 	</script>
