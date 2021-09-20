@@ -1109,7 +1109,7 @@
 				<td class="ta-c">rejected</td>
 			</tr>
 			<tr>
-				<td rowspan="2" class="trn"></td>
+				<td rowspan="3" class="trn"></td>
 				<td rowspan="2" class="ta-r"><code>.all([...])</code></td>
 				<td class="result-fulfield gliph"></td>
 				<td class="all-args">
@@ -1145,7 +1145,41 @@
 				</td>
 			</tr>
 			<tr>
-				<td rowspan="2" class="trn"></td>
+				<td class="ta-l" colspan="6">
+					<details>
+						<summary>code</summary>
+						<div class="ace-plug-js">
+							Promise.all([
+								Promise.resolve(3),
+								Promise.reject(4),
+								Promise.resolve(5),
+								Promise.reject(6),
+								// new Promise(() => {}),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// error >> 4
+						</div>
+						<div class="ace-plug-js">
+							Promise.all([
+								Promise.resolve(3),
+								Promise.resolve(5),
+								// new Promise(() => {}),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// value >> [3, 5]
+						</div>
+						<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+					</details>
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="3" class="trn"></td>
 				<td rowspan="2" class="ta-r"><code>.allSettled([...])</code></td>
 				<td class="result-fulfield gliph"></td>
 				<td class="all-args" class="all-args">
@@ -1181,13 +1215,46 @@
 			<tr>
 				<td class="result-rejected gliph"></td>
 				<td class="result-rejected can-not-be" colspan="4"><p>Imposible</p></td>
-				<!-- <td class="result-rejected all-args"><p>---</p></td>
-				<td class="result-rejected arg-fulfield"><p>---</p></td>
-				<td class="result-rejected arg-rejected"><p>---</p></td>
-				<td class="result-rejected"><p>---</p></td> -->
 			</tr>
 			<tr>
-				<td rowspan="2" class="trn"></td>
+				<td class="ta-l" colspan="6">
+					<details>
+						<summary>code</summary>
+						<div class="ace-plug-js">
+							Promise.allSettled([
+								Promise.resolve(22),
+								Promise.reject(23),
+								// new Promise(() => {}),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// [
+							//     {status: "fulfilled", value:  22},
+							//     {status: "rejected" , reason: 23}
+							// ]
+						</div>
+						<div class="ace-plug-js">
+							Promise.allSettled([
+								Promise.resolve(22),
+								Promise.reject(23),
+								Promise.resolve(24),
+								Promise.reject(25),
+								// new Promise(() => {}),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// 
+						</div>
+						<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+					</details>
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="3" class="trn"></td>
 				<td rowspan="2" class="ta-r"><code>.any([...])</code></td>
 				<td class="result-fulfield gliph"></td>
 				<td class="all-args">
@@ -1222,7 +1289,54 @@
 				</td>
 			</tr>
 			<tr>
-				<td rowspan="2" class="trn"></td>
+				<td class="ta-l" colspan="6">
+					<details>
+						<summary>code</summary>
+						<div class="ace-plug-js">
+							Promise.any([
+								Promise.resolve(33),
+								Promise.reject(34),
+								Promise.resolve(35),
+								new Promise(() => {}),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// value >> 33
+						</div>
+						<div class="ace-plug-js">
+							Promise.any([
+								Promise.reject(34),
+								Promise.resolve(33),
+								Promise.resolve(35),
+								new Promise(() => {}),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// value >> 33
+						</div>
+						<div class="ace-plug-js">
+							Promise.any([
+								Promise.reject(34),
+								Promise.reject(35),
+								Promise.reject(36),
+								Promise.reject(37),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// error >> AggregateError: All promises were rejected
+						</div>
+						<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+					</details>
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="3" class="trn"></td>
 				<td rowspan="2" class="ta-r"><code>.race([...])</code></td>
 				<td class="result-fulfield gliph"></td>
 				<td class="all-args">
@@ -1254,6 +1368,38 @@
 				<td class="result-rejected">
 					<p>The <span class="selected-word">ERROR</span> of <span class="selected-word">FIRST</span> <span class="selected-word">REJECTED</span> promise.</p>
 					<p><code><span class="meta cb">error</span></code></p>
+				</td>
+			</tr>
+			<tr>
+				<td class="ta-l" colspan="6">
+					<details>
+						<summary>code</summary>
+						<div class="ace-plug-js">
+							Promise.race([
+								Promise.resolve(41),
+								Promise.reject(42),
+								new Promise(() => {}),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// value >> 41
+						</div>
+						<div class="ace-plug-js">
+							Promise.race([
+								Promise.reject(42),
+								Promise.resolve(41),
+								new Promise(() => {}),
+							]).then(
+								val => console.log("value >>", val),
+								err => console.log("error >>", err)
+							);
+
+							// error >> 42
+						</div>
+						<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
+					</details>
 				</td>
 			</tr>
 		</tbody>
