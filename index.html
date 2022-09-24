@@ -678,6 +678,148 @@
 			</details>
 		</li>
 		<li>
+			<h2>Fork and two branches</h2>
+			
+			<div class="mermaid" id="pr_scheme">
+				graph LR
+					subgraph "new Promise ( ... )"
+						ex_sync["sync"]
+						ex_async["async"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_1a["success <br> handler"]
+						e_hand_1a["error <br> handler"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_1b["success <br> handler"]
+						e_hand_1b["error <br> handler"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_2a["success <br> handler 2"]
+						e_hand_2a["error <br> handler 2"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_2b["success <br> handler 2"]
+						e_hand_2b["error <br> handler 2"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_3a["success <br> handler 3"]
+						e_hand_3a["error <br> handler 3"]
+					end
+
+					subgraph ".then ( ... )"
+						s_hand_3b["success <br> handler 3"]
+						e_hand_3b["error <br> handler 3"]
+					end
+
+					ex_sync-->|" ... t ... "|ex_async
+					ex_async==>|"resolve()"|s_hand_1a
+					ex_async-.->|"reject()"|e_hand_1a
+					ex_async==>|"resolve()"|s_hand_1b
+					ex_async-.->|"reject()"|e_hand_1b
+					s_hand_2a-.->|"err"|e_hand_3a
+					s_hand_2b-.->|"err"|e_hand_3b
+					s_hand_1a-.->|"err"|e_hand_2a
+					s_hand_1b-.->|"err"|e_hand_2b
+					s_hand_1a==>s_hand_2a
+					s_hand_1b==>s_hand_2b
+					s_hand_2a==>s_hand_3a
+					s_hand_2b==>s_hand_3b
+					ex_sync-.->|"err"|e_hand_1a
+					ex_sync-.->|"err"|e_hand_1b
+					e_hand_1a==>s_hand_2a
+					e_hand_1b==>s_hand_2b
+					e_hand_1a-.->|"err"|e_hand_2a
+					e_hand_1b-.->|"err"|e_hand_2b
+					e_hand_2a==>s_hand_3a
+					e_hand_2b==>s_hand_3b
+					e_hand_2a-.->|"err"|e_hand_3a
+					e_hand_2b-.->|"err"|e_hand_3b
+
+					class e_hand_1a,e_hand_2a,e_hand_3a,e_hand_4a err-block
+					class e_hand_1b,e_hand_2b,e_hand_3b,e_hand_4b err-block
+
+					class no_hand,no_hand_2,no_hand_3,no_hand_4 empty-block
+
+			</div>
+			<details>
+				<summary>code</summary>
+				<div class="ace-plug-js">
+					var prom = new Promise ((rs, rj) => {
+						console.log("executor");
+						setTimeout(() => rs("foo"), 200);
+					});
+					prom.then (
+							(v) => {
+								console.log("a-1", v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log("a-2", v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log("a-3", v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					
+					prom.then (
+							(v) => {
+								console.log("b-1", v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log("b-2", v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						).
+						then (
+							(v) => {
+								console.log("b-3", v);
+								return v;
+							},
+							(e) => {
+								console.error("-catched-", e);
+								return e;
+							}
+						);
+					console.log("end of tread");
+				</div>
+			</details>
+		</li>
+		<li>
 			<h2><code>.finally(...)</code></h2>
 			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
