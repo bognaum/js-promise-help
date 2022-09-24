@@ -50,12 +50,10 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					var promiseA = Promise.resolve();
 					var promiseB = Promise.resolve("value");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 			<div class="mermaid" id="pr_scheme" style="text-align: left;">
 				graph LR
@@ -69,12 +67,10 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					var promiseA = Promise.reject();
 					var promiseB = Promise.reject(new Error());
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -93,7 +89,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					var promiseA = new Promise ((rs, rj) => {
 						console.log("executor - sync");
@@ -107,7 +102,6 @@
 						);
 					});
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -124,7 +118,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					var promiseB = promiseA.then (
 						(v) => {
@@ -138,7 +131,6 @@
 					);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -163,7 +155,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor");
@@ -181,7 +172,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -216,7 +206,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor");
@@ -271,7 +260,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						setTimeout(rs, 200);
@@ -339,7 +327,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor");
@@ -377,7 +364,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -423,7 +409,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor");
@@ -457,7 +442,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -503,7 +487,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor");
@@ -537,7 +520,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -590,7 +572,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor");
@@ -622,7 +603,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -669,7 +649,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor - sync");
@@ -700,7 +679,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -754,7 +732,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor - sync");
@@ -795,7 +772,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -823,7 +799,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor - sync");
@@ -840,7 +815,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -876,7 +850,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					new Promise ((rs, rj) => {
 						console.log("executor - sync");
@@ -903,7 +876,6 @@
 						);
 					console.log("end of tread");
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -950,7 +922,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					async function fA () {
 						console.log("1");
@@ -966,7 +937,6 @@
 						(error)  => {console.error(`error:` , error); }
 					);
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 		<li>
@@ -991,7 +961,6 @@
 			</div>
 			<details>
 				<summary>code</summary>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 				<div class="ace-plug-js">
 					try {
 						await new Promise((rsl, rj) => {
@@ -1003,7 +972,6 @@
 						console.log(`err >>`, err);
 					}
 				</div>
-				<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 			</details>
 		</li>
 	</ol>
@@ -1174,7 +1142,6 @@
 
 							// value >> [3, 5]
 						</div>
-						<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 					</details>
 				</td>
 			</tr>
@@ -1249,7 +1216,6 @@
 
 							// 
 						</div>
-						<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 					</details>
 				</td>
 			</tr>
@@ -1331,7 +1297,6 @@
 
 							// error >> AggregateError: All promises were rejected
 						</div>
-						<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 					</details>
 				</td>
 			</tr>
@@ -1398,7 +1363,6 @@
 
 							// error >> 42
 						</div>
-						<!-- <? d_l_n(__LINE__, __FILE__); ?><br> -->
 					</details>
 				</td>
 			</tr>
